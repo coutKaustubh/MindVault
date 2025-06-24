@@ -1,313 +1,130 @@
 {% extends "base.html" %}
 {% block start %}
 
-<style>
-  /* ====== Page Background ====== */
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #dbeafe, #fefce8, #e0f2f1);
-    background-size: 600% 600%;
-    animation: backgroundWave 20s ease infinite;
-  }
+<!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <span class="logo-text">MindVault</span>
+            </div>
+        </nav>
+    </header>
 
-  @keyframes backgroundWave {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Your Personal
+                <span class="gradient-text">Knowledge Vault</span>
+            </h1>
+            <p class="hero-description">
+                Store, organize, and access your thoughts, ideas, and memories in a beautiful digital sanctuary. 
+                Create topics, add detailed notes with images, and never lose track of what matters to you.
+            </p>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-primary">Start Writing Your Story</a>
+                <button class="btn btn-secondary">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=800&h=500&fit=crop&crop=center" alt="Person using laptop" class="floating-image">
+            <div class="pulse-icon">⚡</div>
+        </div>
+    </section>
 
-  /* ====== Search Bar at Top ====== */
-  .search-container {
-    width: 90%;
-    max-width: 700px;
-    margin: 30px auto 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 18px 24px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How MindVault Works</h2>
+                <p class="section-subtitle">Simple, intuitive, and powerful. Organize your thoughts in three easy steps.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card blue">
+                    <div class="step-icon">📝</div>
+                    <h3 class="step-title">1. Create a Topic</h3>
+                    <p class="step-description">
+                        Start by creating a topic like "March 21, 2024" or "Physics Studies". 
+                        Organize your thoughts by date, subject, or any way that makes sense to you.
+                    </p>
+                </div>
+                <div class="step-card purple">
+                    <div class="step-icon">🔍</div>
+                    <h3 class="step-title">2. Add Details</h3>
+                    <p class="step-description">
+                        Give your entry a meaningful title like "Physics Q1 - Silly Mistake", 
+                        then add a detailed description with all the context you need.
+                    </p>
+                </div>
+                <div class="step-card green">
+                    <div class="step-icon">🖼️</div>
+                    <h3 class="step-title">3. Enhance with Images</h3>
+                    <p class="step-description">
+                        Optionally add images to make your notes more vivid and memorable. 
+                        Visual context makes everything easier to remember and understand.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  .search-container input[type="text"] {
-    flex: 1;
-    padding: 12px 16px;
-    border: 1px solid #b2dfdb;
-    border-radius: 10px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.9);
-    transition: 0.3s;
-  }
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose MindVault?</h2>
+            </div>
+            <div class="features-grid">
+                <div class="features-content">
+                    <div class="feature-item">
+                        <div class="feature-icon blue">🛡️</div>
+                        <div class="feature-text">
+                            <h3>Private & Secure</h3>
+                            <p>Your thoughts and ideas are completely private. No data collection, no sharing.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon purple">⚡</div>
+                        <div class="feature-text">
+                            <h3>Lightning Fast</h3>
+                            <p>Quick capture and instant search. Find any note or idea in seconds.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon green">📚</div>
+                        <div class="feature-text">
+                            <h3>Beautifully Organized</h3>
+                            <p>Clean, intuitive interface that makes organizing your thoughts a pleasure.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-image">
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop&crop=center" alt="Organized workspace">
+                </div>
+            </div>
+        </div>
+    </section>
 
-  .search-container input[type="text"]:focus {
-    outline: none;
-    border-color: #2196f3;
-    box-shadow: 0 0 8px rgba(33, 150, 243, 0.2);
-  }
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Build Your MindVault?</h2>
+            <p class="cta-description">Start capturing your thoughts, ideas, and memories in a beautiful, organized space.</p>
+            <a href="login.html" class="btn btn-cta">Begin Your Journey</a>
+        </div>
+    </section>
 
-  .search-container button {
-    background-color: #2196f3;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 18px;
-    transition: 0.3s;
-    cursor: pointer;
-    height: 46px;
-    margin-left: 5px;
-  }
-
-  .search-container button:hover {
-    background-color: #1e88e5;
-    transform: scale(1.05);
-  }
-
-  /* ====== Form Container ====== */
-  .form-container {
-    max-width: 750px;
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 35px 45px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    animation: fadeInUp 0.7s ease-in-out;
-  }
-
-  .form-container h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #004d40;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  label {
-    font-weight: 600;
-    display: block;
-    color: #004d40;
-    margin-bottom: 6px;
-  }
-
-  input[type="text"],
-  textarea,
-  input[type="file"] {
-    width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 22px;
-    border: 1px solid #80cbc4;
-    border-radius: 10px;
-    background-color: #ffffff;
-    font-size: 16px;
-    transition: all 0.3s ease;
-  }
-
-  input:focus,
-  textarea:focus {
-    border-color: #26a69a;
-    outline: none;
-    box-shadow: 0 0 10px rgba(38, 166, 154, 0.2);
-  }
-
-  .submit-btn {
-    background-color: #00897b;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
-    width: 100%;
-    transition: 0.3s ease;
-    margin-top: 5px;
-  }
-
-  .submit-btn:hover {
-    background-color: #00695c;
-    transform: translateY(-2px);
-  }
-
-  /* ====== Table Styling ====== */
-  .table {
-    width: 95%;
-    margin: 40px auto;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-    animation: fadeIn 0.8s ease-in-out;
-  }
-
-  .table thead {
-    background-color: #009688;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .table th,
-  .table td {
-    padding: 18px 20px;
-    text-align: left;
-    border-bottom: 1px solid #eeeeee;
-    vertical-align: middle;
-  }
-
-  .table tbody tr:nth-child(even) {
-    background-color: #e0f2f1;
-  }
-
-  .table tbody tr:hover {
-    background-color: #b2dfdb;
-    transition: 0.3s ease;
-  }
-
-  .table td img {
-    max-width: 100px;
-    height: auto;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  .table td img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  }
-
-  /* ====== Buttons ====== */
-  .btn1 {
-    background-color: #ef5350;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    margin-right: 6px;
-  }
-
-  .btn1:hover {
-    background-color: #c62828;
-    transform: scale(1.05);
-  }
-
-  .btnupdate {
-    background-color: #42a5f5;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    margin-left: 0px;
-  }
-
-  .btnupdate:hover {
-    background-color: #1976d2;
-    transform: scale(1.05);
-  }
-
-  .linkbtn {
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-</style>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-icon">📚</div>
+                <span class="logo-text">MindVault</span>
+            </div>
+            <p class="footer-text">Your personal knowledge, beautifully organized.</p>
+        </div>
+    </footer>
 
 
-
-
-</head>
-<body>
-  <div class="search-container">
-  <form method="GET" style="display: flex; width: 100%;">
-    <input type="text" name="search" placeholder="Search your recipe..." />
-    <button type="submit" class="srch">Search</button>
-  </form>
-</div>
-
-
-
-  
-  <div class="form-container">
-    <h2>Add Recipe</h2>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="name">Recipe Name</label>
-        <input type="text" id="name" name="receipe_name" required />
-      </div>
-
-      <div class="form-group">
-        <label for="description">Recipe Description</label>
-        <textarea id="description" name="receipe_description" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="image">Upload Image</label>
-        <input type="file" id="image" name="receipe_image" accept="image/*" />
-      </div>
-
-      <button type="submit" class="submit-btn">Add Receipe</button>
-    </form>
-   
-  </div>
-<br>
-<table class="table">
-  <thead>
-    <tr>
-      
-      <th scope="col">S no</th>
-      <th scope="col">Receipe name</th>
-      <th scope="col">Receipe Description</th>
-      <th scope="col">Image</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    <tr>
-    {% for receipe in receipes %}
-      <th scope="row">{{forloop.counter}}</th>
-      <td>{{receipe.receipe_name}}</td> 
-      <td>{{receipe.receipe_description}}</td>
-      <td><img src = "/media/{{receipe.receipe_image}}" style="height: 100px; width: 100px;"></td>
-      <td>
-  <div style="display: flex; flex-direction: column; gap: 8px;">
-    <a href="/delete-receipe/{{receipe.id}}" class="linkbtn">
-      <button class="btn1">Delete</button>
-    </a>
-    <a href="/update-receipe/{{receipe.id}}" class="linkbtn">
-      <button class="btnupdate">Update</button>
-    </a>
-  </div>
-</td>
-
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
 {% endblock %}

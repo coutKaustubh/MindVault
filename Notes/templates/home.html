@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% block start %}
+
+<header class="app-header">
+        <div class="app-nav">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <div class="logo-info">
+                    <span class="logo-text">MindVault</span>
+                    <span class="logo-subtitle">Your Personal Knowledge Space</span>
+                </div>
+            </div>
+            <a href="index.html" class="logout-btn">
+                🚪 Logout
+            </a>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Left Side - Topic Input -->
+        <div class="topic-panel">
+            <div class="panel-header">
+                <h2>Create Topic</h2>
+                <p>Start by creating a topic to organize your notes</p>
+            </div>
+            
+            <form class="topic-form" id="topicForm">
+                <div class="form-group">
+                    <label for="topicName">Topic Name</label>
+                    <input type="text" id="topicName" placeholder="e.g., March 21, 2024 or Physics Studies" required>
+                    <small>Choose a topic that helps you organize related notes</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Topic</button>
+            </form>
+
+            <div class="current-topic" id="currentTopic" style="display: none;">
+                <h3>Current Topic:</h3>
+                <div class="topic-badge" id="topicBadge"></div>
+            </div>
+        </div>
+
+        <!-- Right Side - Note Form -->
+        <div class="note-panel">
+            <div class="panel-header">
+                <h2>Add Note</h2>
+                <p>Fill in the details for your new note</p>
+            </div>
+
+            <form class="note-form" id="noteForm">
+                <div class="form-group">
+                    <label for="noteTitle">Title *</label>
+                    <input type="text" id="noteTitle" placeholder="e.g., Physics Q1 - Silly Mistake" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="noteDescription">Description *</label>
+                    <textarea id="noteDescription" rows="6" placeholder="Describe your note in detail..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="noteImage">Image URL (Optional)</label>
+                    <input type="url" id="noteImage" placeholder="https://example.com/image.jpg">
+                    <small>Add an image to make your note more memorable</small>
+                </div>
+
+                <div class="image-preview" id="imagePreview" style="display: none;">
+                    <img id="previewImage" alt="Preview">
+                </div>
+
+                <button type="submit" class="btn btn-primary" disabled id="saveBtn">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notes Table -->
+    <div class="notes-section">
+        <div class="section-header">
+            <h2>Your Notes</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search your notes...">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+
+        <div class="notes-table-container">
+            <table class="notes-table" id="notesTable">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="notesTableBody">
+                    <!-- Notes will be added here -->
+                </tbody>
+            </table>
+            
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📝</div>
+                <h3>No notes yet</h3>
+                <p>Create your first topic to start building your knowledge vault</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTopic = '';
+        let notes = [];
+
+        // Topic form handling
+        document.getElementById('topicForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const topicName = document.getElementById('topicName').value.trim();
+            
+            if (topicName) {
+                currentTopic = topicName;
+                document.getElementById('topicBadge').textContent = topicName;
+                document.getElementById('currentTopic').style.display = 'block';
+                document.getElementById('saveBtn').disabled = false;
+                document.getElementById('topicName').value = '';
+            }
+        });
+
+        // Image preview
+        document.getElementById('noteImage').addEventListener('input', function(e) {
+            const imageUrl = e.target.value;
+            const preview = document.getElementById('imagePreview');
+            const previewImage = document.getElementById('previewImage');
+            
+            if (imageUrl) {
+                previewImage.src = imageUrl;
+                preview.style.display = 'block';
+                
+                previewImage.onerror = function() {
+                    preview.style.display = 'none';
+                };
+            } else {
+                preview.style.display = 'none';
+            }
+        });
+
+        // Note form handling
+        document.getElementById('noteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!currentTopic) {
+                alert('Please create a topic first!');
+                return;
+            }
+            
+            const title = document.getElementById('noteTitle').value;
+            const description = document.getElementById('noteDescription').value;
+            const image = document.getElementById('noteImage').value;
+            
+            const note = {
+                id: Date.now(),
+                topic: currentTopic,
+                title: title,
+                description: description,
+                image: image,
+                date: new Date().toLocaleDateString()
+            };
+            
+            notes.unshift(note);
+            addNoteToTable(note);
+            
+            // Clear form
+            document.getElementById('noteForm').reset();
+            document.getElementById('imagePreview').style.display = 'none';
+            
+            // Hide empty state
+            document.getElementById('emptyState').style.display = 'none';
+        });
+
+        // Add note to table
+        function addNoteToTable(note) {
+            const tbody = document.getElementById('notesTableBody');
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td><span class="topic-badge">${note.topic}</span></td>
+                <td class="note-title">${note.title}</td>
+                <td class="note-description">${note.description}</td>
+                <td>${note.image ? '<span class="has-image">🖼️</span>' : '<span class="no-image">-</span>'}</td>
+                <td>${note.date}</td>
+            `;
+            
+            tbody.appendChild(row);
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#notesTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+
+    
+{% endblock %}

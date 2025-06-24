@@ -4,26 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{context}}</title>
-    
+    <title>Home - MindVault</title>
+     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav style="background-color: #00796b; padding: 15px; color: white; display: flex; justify-content: space-between; align-items: center;">
-  <div style="font-weight: bold; font-size: 20px;">
-    Recipe App
-  </div>
-
-  <div>
-    {% if user.is_authenticated %}
-      <span style="margin-right: 15px;">Hi, {{ user.username }}</span>
-      <a href="/logout/" style="color: white; text-decoration: none; margin-right: 10px;">Logout</a>
-    {% else %}
-      <a href="/login/" style="color: white; text-decoration: none; margin-right: 10px;">Login</a>
-      <a href="/register/" style="color: white; text-decoration: none;">Register</a>
-    {% endif %}
-  </div>
-</nav>
-
     
 {% block start %}
 
