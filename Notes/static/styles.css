@@ -791,3 +791,11 @@ body {
         padding: 20px;
     }
 }
+.styled-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    background-color: #f9f9f9;
+}

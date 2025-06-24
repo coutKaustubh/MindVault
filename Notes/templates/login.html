@@ -5,7 +5,7 @@
 <body class="login-body">
     <div class="login-container">
         <!-- Back Button -->
-        <a href="index.html" class="back-button">
+        <a href="/home/" class="back-button">
             ← Back to Home
         </a>
 
@@ -20,12 +20,12 @@
                 <p class="login-subtitle">Sign in to access your vault</p>
             </div>
 
-            <form class="login-form" id="loginForm">
+            <form class="login-form" id="loginForm" method="post">
                 <div class="form-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Username</label>
                     <div class="input-wrapper">
                         <span class="input-icon">📧</span>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        <input type="email" id="email" name="username" placeholder="Enter your Username" required>
                     </div>
                 </div>
 
@@ -56,20 +56,27 @@
                 <p class="login-subtitle">Start building your personal knowledge vault</p>
             </div>
 
-            <form class="login-form" id="registerForm">
+            <form class="login-form" id="registerForm" method="post">
                 <div class="form-group">
-                    <label for="fullName">Full Name</label>
+                    <label for="fullName">First Name</label>
                     <div class="input-wrapper">
                         <span class="input-icon">👤</span>
-                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                        <input type="text" id="fullName" name="first_name" placeholder="Enter your First name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Last Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="fullName" name="last_name" placeholder="Enter your Last name" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="regEmail">Email Address</label>
+                    <label for="regEmail">Create Username</label>
                     <div class="input-wrapper">
                         <span class="input-icon">📧</span>
-                        <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                        <input type="text" id="regEmail" name="username" placeholder="Create Username" required>
                     </div>
                 </div>
 
@@ -115,7 +122,7 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             // Simulate login - redirect to home
-            window.location.href = 'home.html';
+            window.location.href = '/MindVault/';
         });
 
         document.getElementById('registerForm').addEventListener('submit', function(e) {
@@ -129,7 +136,7 @@
             }
             
             // Simulate registration - redirect to home
-            window.location.href = 'home.html';
+            window.location.href = '/MindVault/';
         });
     </script>
 

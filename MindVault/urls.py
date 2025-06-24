@@ -20,5 +20,8 @@ from Notes.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('landing/',landing_page, name = "notes"),
+    path('home/',landing_page, name = "landing_page"),
+    path('MindVault/',notes_entry, name = "notes_entry"),
+    path('login/',login_page, name = "login_page"),
+
 ]
