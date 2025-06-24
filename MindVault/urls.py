@@ -23,5 +23,6 @@ urlpatterns = [
     path('home/',landing_page, name = "landing_page"),
     path('MindVault/',notes_entry, name = "notes_entry"),
     path('login/',login_page, name = "login_page"),
+    path('register/',register, name = "register"),
 
 ]

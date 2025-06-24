@@ -1,7 +1,5 @@
-
 {% extends "base.html" %}
 {% block start %}
-
 <body class="login-body">
     <div class="login-container">
         <!-- Back Button -->
@@ -20,12 +18,13 @@
                 <p class="login-subtitle">Sign in to access your vault</p>
             </div>
 
-            <form class="login-form" id="loginForm" method="post">
+            <form class="login-form" id="loginForm" method="post" action="">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="email">Username</label>
                     <div class="input-wrapper">
                         <span class="input-icon">📧</span>
-                        <input type="email" id="email" name="username" placeholder="Enter your Username" required>
+                        <input type="text" id="email" name="username" placeholder="Enter your Username" required>
                     </div>
                 </div>
 
@@ -41,103 +40,9 @@
             </form>
 
             <div class="login-toggle">
-                <p>Don't have an account? <a href="#" onclick="toggleForm()">Sign Up</a></p>
-            </div>
-        </div>
-
-        <!-- Register Form (Hidden by default) -->
-        <div class="login-card" id="registerCard" style="display: none;">
-            <div class="login-header">
-                <div class="logo">
-                    <div class="logo-icon">📚</div>
-                    <span class="logo-text">MindVault</span>
-                </div>
-                <h1 class="login-title">Create Your Account</h1>
-                <p class="login-subtitle">Start building your personal knowledge vault</p>
-            </div>
-
-            <form class="login-form" id="registerForm" method="post">
-                <div class="form-group">
-                    <label for="fullName">First Name</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">👤</span>
-                        <input type="text" id="fullName" name="first_name" placeholder="Enter your First name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="fullName">Last Name</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">👤</span>
-                        <input type="text" id="fullName" name="last_name" placeholder="Enter your Last name" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="regEmail">Create Username</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">📧</span>
-                        <input type="text" id="regEmail" name="username" placeholder="Create Username" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="regPassword">Password</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">🔒</span>
-                        <input type="password" id="regPassword" name="password" placeholder="Enter your password" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">🔒</span>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
-            </form>
-
-            <div class="login-toggle">
-                <p>Already have an account? <a href="#" onclick="toggleForm()">Sign In</a></p>
+                <p>Don't have an account? <a href="/register/">Sign Up</a></p>
             </div>
         </div>
     </div>
-
-    <script>
-        function toggleForm() {
-            const loginCard = document.querySelector('.login-card:not(#registerCard)');
-            const registerCard = document.getElementById('registerCard');
-            
-            if (loginCard.style.display === 'none') {
-                loginCard.style.display = 'block';
-                registerCard.style.display = 'none';
-            } else {
-                loginCard.style.display = 'none';
-                registerCard.style.display = 'block';
-            }
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Simulate login - redirect to home
-            window.location.href = '/MindVault/';
-        });
-
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-            // Simulate registration - redirect to home
-            window.location.href = '/MindVault/';
-        });
-    </script>
-
+</body>
 {% endblock %}

@@ -1,5 +1,9 @@
-from django.shortcuts import render, redirect
-from .models import Topic, Entry
+from django.shortcuts import render,redirect
+from .models import *
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 def landing_page(request):
     return render(request, "index.html")
@@ -45,4 +49,26 @@ def notes_entry(request):
     })
 
 def login_page(request):
-    return render(request , "login.html")
+
+    if request.method != 'POST':
+        return render(request , "login.html")
+
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    
+    if not User.objects.filter(username=username).exists():
+        messages.error(request,'Invalid Username')
+        return redirect('/login/')
+    
+    user = authenticate(username=username,password=password)
+    if user is None:
+        messages.error(request , 'Invalid Password')
+        return redirect('/login/')
+    
+    else:
+        login(request , user)
+        return redirect('/MindVault/')
+
+
+def register(request):
+    return render(request , "register.html")
