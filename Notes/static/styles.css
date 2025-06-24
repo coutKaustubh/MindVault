@@ -799,3 +799,46 @@ body {
     width: 100%;
     background-color: #f9f9f9;
 }
+ .messages {
+  list-style-type: none;
+  padding: 0;
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.messages li {
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Success = Green */
+.messages li.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 6px solid #28a745;
+}
+
+/* Error = Red */
+.messages li.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 6px solid #dc3545;
+}
+
+/* Info = Blue */
+.messages li.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-left: 6px solid #17a2b8;
+}
+
+/* Warning = Yellow */
+.messages li.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-left: 6px solid #ffc107;
+}

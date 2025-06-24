@@ -45,7 +45,7 @@
 
             <div class="form-group">
                 <label for="selected_topic">Select Topic</label>
-                <select name="selected_topic" id="selected_topic" class="styled-select" required>
+                <select name="selected_topic" id="selected_topic" class="styled-select" >
                     {% for topic in topics %}
                         <option value="{{ topic.id }}">{{ topic.name }}</option>
                     {% endfor %}
@@ -72,57 +72,5 @@
     </div>
 </div>
 
-<!-- Notes Table -->
-<div class="notes-section">
-    <div class="section-header">
-        <h2>Your Notes</h2>
-    </div>
-
-    {% if entries %}
-    <table class="notes-table">
-        <thead>
-            <tr>
-                <th>S.no</th>
-                <th>Topic</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Image</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for entry in entries %}
-            <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{ entry.topic.name }}</td>
-                <td>{{ entry.title }}</td>
-                <td>{{ entry.description }}</td>
-                <td>
-                    {% if entry.image %}
-                <a href = "/media/{{entry.image}}" target="_blank"><img src = "/media/{{entry.image}}" style="height: 100px; width: 100px;"></a></t>
-                    {% else %}
-                        No Image
-                    {% endif %}
-                </td>
-                <td>{{ entry.created_at|date:"M d, Y" }}</td>
-                <td>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <a href="/delete-entry/{{entry.id}}/" class="linkbtn">
-                <button class="btn btn-danger" style="background-color: rgb(233, 58, 58);">Delete</button>
-                </a>
-                <a href="/update-entry/{{entry.id}}/" class="linkbtn">
-                <button class="btn btn-primary">Update</button>
-                </a>
-            </div>
-            </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p>No notes added yet. Create a topic and start writing!</p>
-    {% endif %}
-</div>
 
 {% endblock %}

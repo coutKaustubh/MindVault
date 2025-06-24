@@ -9,10 +9,12 @@ def landing_page(request):
     return render(request, "index.html")
 
 
+
+@login_required(login_url='/login/')
 def notes_entry(request):
     topics = Topic.objects.all()
     entries = Entry.objects.all().order_by('-created_at')
-
+    
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
 
@@ -20,7 +22,11 @@ def notes_entry(request):
         if form_type == 'add_topic':
             topic_name = request.POST.get('topic')
             if topic_name:
-                Topic.objects.create(name=topic_name)
+                Topic.objects.create(
+                    user = request.user,
+                    name=topic_name,
+
+                    )
             return redirect('/MindVault/')
 
         # Handle Note creation
@@ -33,6 +39,7 @@ def notes_entry(request):
             try:
                 topic = Topic.objects.get(id=topic_id)
                 Entry.objects.create(
+                    user = request.user,
                     topic=topic,
                     title=title,
                     description=description,
@@ -71,4 +78,71 @@ def login_page(request):
 
 
 def register(request):
-    return render(request , "register.html")
+    if request.method != "POST":
+        return render(request , "register.html")
+    
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    user = User.objects.filter(username=username)
+    if user.exists():
+        messages.info(request, "Username already taken")
+        return redirect('/register/')
+
+    user = User.objects.create(
+        first_name = first_name,
+        last_name = last_name,
+        username= username,
+
+    )
+
+    user.set_password(password)
+    user.save()
+
+    messages.info(request, "Account Created Successfully")
+
+    return redirect('/register')
+@login_required(login_url='/login/')
+def delete_entry(request, id):
+    entry = Entry.objects.get(id=id)
+    print("Entry user:", entry.user)
+    print("Current user:", request.user)
+
+    if entry.user != request.user:
+        print("User mismatch!")
+        return redirect('/MindVault/')
+    
+    entry.delete()
+    return redirect('/MindVault/')
+    
+@login_required(login_url='/login/')
+def update_entry(request, id):
+    queryset = Entry.objects.get(id=id)
+    
+    if queryset.user != request.user:
+        return redirect('/MindVault/')
+
+    if request.method == 'POST':
+        topic_id = request.POST.get('selected_topic')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+
+       
+        queryset.topic = Topic.objects.get(id=topic_id)
+        queryset.title = title 
+        queryset.description = description 
+
+        if image:
+            queryset.image = image
+
+        queryset.save()
+        return redirect('/MindVault/')
+
+    context = {
+        'mindvault': queryset,
+        'topics': Topic.objects.filter(user=request.user)  
+    }
+    return render(request, "update_entry.html", context)

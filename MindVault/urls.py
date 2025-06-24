@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Notes.views import *
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +27,12 @@ urlpatterns = [
     path('MindVault/',notes_entry, name = "notes_entry"),
     path('login/',login_page, name = "login_page"),
     path('register/',register, name = "register"),
+    path('delete-entry/<int:id>/' , delete_entry , name = "delete-entry"),
+    path('update-entry/<int:id>/' , update_entry , name = "update-entry"),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
