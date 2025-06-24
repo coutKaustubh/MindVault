@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+{% block start %}
+
+<style>
+  /* ====== Page Background ====== */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #fefce8, #e0f2f1);
+    background-size: 600% 600%;
+    animation: backgroundWave 20s ease infinite;
+  }
+
+  @keyframes backgroundWave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ====== Search Bar at Top ====== */
+  .search-container {
+    width: 90%;
+    max-width: 700px;
+    margin: 30px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-container input[type="text"] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #b2dfdb;
+    border-radius: 10px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: 0.3s;
+  }
+
+  .search-container input[type="text"]:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.2);
+  }
+
+  .search-container button {
+    background-color: #2196f3;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    transition: 0.3s;
+    cursor: pointer;
+    height: 46px;
+    margin-left: 5px;
+  }
+
+  .search-container button:hover {
+    background-color: #1e88e5;
+    transform: scale(1.05);
+  }
+
+  /* ====== Form Container ====== */
+  .form-container {
+    max-width: 750px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px 45px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    animation: fadeInUp 0.7s ease-in-out;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #004d40;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    color: #004d40;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 22px;
+    border: 1px solid #80cbc4;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: #26a69a;
+    outline: none;
+    box-shadow: 0 0 10px rgba(38, 166, 154, 0.2);
+  }
+
+  .submit-btn {
+    background-color: #00897b;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    width: 100%;
+    transition: 0.3s ease;
+    margin-top: 5px;
+  }
+
+  .submit-btn:hover {
+    background-color: #00695c;
+    transform: translateY(-2px);
+  }
+
+  /* ====== Table Styling ====== */
+  .table {
+    width: 95%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.8s ease-in-out;
+  }
+
+  .table thead {
+    background-color: #009688;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .table th,
+  .table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eeeeee;
+    vertical-align: middle;
+  }
+
+  .table tbody tr:nth-child(even) {
+    background-color: #e0f2f1;
+  }
+
+  .table tbody tr:hover {
+    background-color: #b2dfdb;
+    transition: 0.3s ease;
+  }
+
+  .table td img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .table td img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* ====== Buttons ====== */
+  .btn1 {
+    background-color: #ef5350;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-right: 6px;
+  }
+
+  .btn1:hover {
+    background-color: #c62828;
+    transform: scale(1.05);
+  }
+
+  .btnupdate {
+    background-color: #42a5f5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-left: 0px;
+  }
+
+  .btnupdate:hover {
+    background-color: #1976d2;
+    transform: scale(1.05);
+  }
+
+  .linkbtn {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+
+
+
+</head>
+<body>
+  <div class="search-container">
+  <form method="GET" style="display: flex; width: 100%;">
+    <input type="text" name="search" placeholder="Search your recipe..." />
+    <button type="submit" class="srch">Search</button>
+  </form>
+</div>
+
+
+
+  
+  <div class="form-container">
+    <h2>Add Recipe</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Recipe Name</label>
+        <input type="text" id="name" name="receipe_name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Recipe Description</label>
+        <textarea id="description" name="receipe_description" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="receipe_image" accept="image/*" />
+      </div>
+
+      <button type="submit" class="submit-btn">Add Receipe</button>
+    </form>
+   
+  </div>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">S no</th>
+      <th scope="col">Receipe name</th>
+      <th scope="col">Receipe Description</th>
+      <th scope="col">Image</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    <tr>
+    {% for receipe in receipes %}
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{receipe.receipe_name}}</td> 
+      <td>{{receipe.receipe_description}}</td>
+      <td><img src = "/media/{{receipe.receipe_image}}" style="height: 100px; width: 100px;"></td>
+      <td>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <a href="/delete-receipe/{{receipe.id}}" class="linkbtn">
+      <button class="btn1">Delete</button>
+    </a>
+    <a href="/update-receipe/{{receipe.id}}" class="linkbtn">
+      <button class="btnupdate">Update</button>
+    </a>
+  </div>
+</td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
