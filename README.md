@@ -45,16 +45,16 @@ MindVault is a personal knowledge vault web application built with **Django**. I
 ## 🖼️ Screenshots
 
 ### 🔐 Home Page
-![Home Page](screenshots/home.png)
+![Home Page](MindVault/screenshots/home.png)
 
 ### 📝 Add Note Interface
-![Add Note](screenshots/note.png)
+![Add Note](MindVault/screenshots/note.png)
 
 ### 📑 Notes Table View
-![Notes Table](screenshots/notes_table.png)
+![Notes Table](MindVault/screenshots/notes_table.png)
 
 ### ✏️ Update Entry
-![Update Entry](screenshots/update_entry.png)
+![Update Entry](MindVault/screenshots/update_entry.png)
 
 
 
