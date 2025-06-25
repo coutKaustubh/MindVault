@@ -11,7 +11,10 @@
                 <span class="logo-subtitle">Welcome, {{user.first_name}}</span>
             </div>
         </div>
-        <a href="/home/" class="logout-btn">🚪 Logout</a>
+        <form method="POST" action="{% url 'logout_page' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">🚪 Logout</button>
+        </form>
     </div>
 </header>
 
@@ -46,6 +49,7 @@
             <div class="form-group">
                 <label for="selected_topic">Select Topic</label>
                 <select name="selected_topic" id="selected_topic" class="styled-select" required>
+                    <option value="" disabled selected>Select a topic</option>
                     {% for topic in topics %}
                         <option value="{{ topic.id }}">{{ topic.name }}</option>
                     {% endfor %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -12,8 +12,8 @@ def landing_page(request):
 
 @login_required(login_url='/login/')
 def notes_entry(request):
-    topics = Topic.objects.all()
-    entries = Entry.objects.all().order_by('-created_at')
+    topics = Topic.objects.filter(user=request.user) 
+    entries = Entry.objects.filter(user=request.user).order_by('-created_at')
     
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
@@ -119,30 +119,36 @@ def delete_entry(request, id):
     
 @login_required(login_url='/login/')
 def update_entry(request, id):
-    queryset = Entry.objects.get(id=id)
-    
-    if queryset.user != request.user:
+    entry = get_object_or_404(Entry, id=id)
+
+    if entry.user != request.user:
         return redirect('/MindVault/')
 
     if request.method == 'POST':
+        
         topic_id = request.POST.get('selected_topic')
         title = request.POST.get('title')
         description = request.POST.get('description')
         image = request.FILES.get('image')
 
-       
-        queryset.topic = Topic.objects.get(id=topic_id)
-        queryset.title = title 
-        queryset.description = description 
+        if topic_id:
+            entry.topic = get_object_or_404(Topic, id=topic_id)
+
+        entry.title = title
+        entry.description = description
 
         if image:
-            queryset.image = image
+            entry.image = image
 
-        queryset.save()
+        entry.save()
         return redirect('/MindVault/')
 
     context = {
-        'mindvault': queryset,
-        'topics': Topic.objects.filter(user=request.user)  
+        'mindvault': entry,
+        'topics': Topic.objects.filter(user=request.user)
     }
-    return render(request, "update_entry.html", context)
+    return render(request, 'update_entry.html', context)
+
+def logout_page(request):
+    logout(request)
+    return redirect('/home/')

@@ -11,28 +11,14 @@
                 <span class="logo-subtitle">Welcome, {{user.first_name}}</span>
             </div>
         </div>
-        <a href="/home/" class="logout-btn">🚪 Logout</a>
+        <form method="POST" action="{% url 'logout_page' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">🚪 Logout</button>
+        </form>
     </div>
 </header>
 
 <div class="app-container">
-    <!-- Topic Form -->
-    <div class="topic-panel">
-        <div class="panel-header">
-            <h2>Create Topic</h2>
-            <p>Start by creating a topic to organize your notes</p>
-        </div>
-        <form class="topic-form" id="topicForm" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="form_type" value="add_topic">
-            <div class="form-group">
-                <label for="topicName">Topic Name</label>
-                <input type="text" name="topic" id="topicName" placeholder="e.g., Physics, JEE 24 July" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Create Topic</button>
-        </form>
-    </div>
-
     <!-- Note Form -->
     <div class="note-panel">
         <div class="panel-header">
@@ -46,6 +32,7 @@
             <div class="form-group">
                 <label for="selected_topic">Select Topic</label>
                 <select name="selected_topic" id="selected_topic" class="styled-select" >
+                    <option value="" disabled selected>If you don't see your topic Kindly add topic from home and update it</option>
                     {% for topic in topics %}
                         <option value="{{ topic.id }}">{{ topic.name }}</option>
                     {% endfor %}
@@ -54,12 +41,12 @@
 
             <div class="form-group">
                 <label for="noteTitle">Title</label>
-                <input type="text" name="title" id="noteTitle" required>
+            <input type="text" name="title" id="noteTitle" value="{{ mindvault.title }}" required>
             </div>
 
             <div class="form-group">
                 <label for="noteDescription">Description</label>
-                <textarea name="description" id="noteDescription" rows="5" required></textarea>
+                <textarea name="description" id="noteDescription" rows="5" required>{{ mindvault.description }}</textarea>
             </div>
 
             <div class="form-group">

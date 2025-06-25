@@ -29,6 +29,7 @@ urlpatterns = [
     path('register/',register, name = "register"),
     path('delete-entry/<int:id>/' , delete_entry , name = "delete-entry"),
     path('update-entry/<int:id>/' , update_entry , name = "update-entry"),
+    path('logout/' , logout_page , name = "logout_page"),
 
 ]
 
