@@ -80,27 +80,27 @@ MindVault is a personal knowledge vault web application built with **Django**. I
 **python manage.py runserver**
 
 
-MindVault/
-│
-├── Notes/
-│   ├── templates/
-│   │   ├── login.html
-│   │   ├── register.html
-│   │   ├── home.html
-│   │   └── update_entry.html
-│   ├── models.py
-│   ├── views.py
-│   └── ...
-│
-├── static/
-│   └── css/
-│       └── styles.css
-│
-├── media/
-│   └── entries/
-│
-├── db.sqlite3
-└── manage.py
+MindVault/<br>
+│<br>
+├── Notes/<br>
+│   ├── templates/<br>
+│   │   ├── login.html<br>
+│   │   ├── register.html<br>
+│   │   ├── home.html<br>
+│   │   └── update_entry.html<br>
+│   ├── models.py<br>
+│   ├── views.py<br>
+│   └── ...<br>
+│<br>
+├── static/<br>
+│   └── css/<br>
+│       └── styles.css<br>
+│<br>
+├── media/<br>
+│   └── entries/<br>
+│<br>
+├── db.sqlite3<br>
+└── manage.py<br>
 
 
 ## Features
